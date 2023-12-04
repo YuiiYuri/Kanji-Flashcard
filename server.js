@@ -2,9 +2,14 @@ const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 const authController = require('./src/controllers/authController');
+const courseController = require('./src/controllers/courseController');
+const wordController = require('./src/controllers/wordController');
+
 const LocalStrategy = require('passport-local').Strategy; // Import LocalStrategy
 const mysql = require('mysql2');
-
+// const User = require('./src/models/userModel');
+const Course = require('./src/models/courseModel');
+const courseRouter = require('./src/controllers/courseController');
 const app = express();
 app.set('views', './src/resources/views'); // Replace 'path_to_views_directory' with the actual path
 
@@ -24,11 +29,14 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
+app.get('/courses/:course_id', courseController.getcourse);
+app.get('/courses', courseController.getallcourse);
 app.post('/login', authController.login);
 
 app.get('/register', (req, res) => {
   res.render('register');
 });
+app.get('/course/courseDetail/:course_id', wordController.getallwordfromcourse);
 
 app.post('/register', authController.register);
 
@@ -73,23 +81,17 @@ passport.use(new LocalStrategy(async (username, password, done) => {
       done(error);
     }
   });
-// Thiết lập kết nối cơ sở dữ liệu
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: '8yearcard',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-  });
-  
-  // Kiểm tra kết nối
-  pool.getConnection((err, connection) => {
-    if (err) {
-      console.error('Kết nối cơ sở dữ liệu thất bại: ', err.message);
-    } else {
-      console.log('Đã kết nối đến cơ sở dữ liệu');
-      connection.release(); // Trả kết nối về pool
-    }
-});
+// const { Sequelize } = require('sequelize');
+
+// const sequelize = new Sequelize('8yearcard', 'root', '', {
+//   host: 'localhost',
+//   dialect: 'mysql',
+// });
+
+// Kiểm tra kết nối
+// try {
+//   await sequelize.authenticate();
+//   console.log('Connection to the database has been established successfully.');
+// } catch (error) {
+//   console.error('Unable to connect to the database:', error);
+// }

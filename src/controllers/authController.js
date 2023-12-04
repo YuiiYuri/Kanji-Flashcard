@@ -11,12 +11,14 @@ const authController = {
 
   register: async (req, res) => {
     try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const { username, password, name, email } = req.body;
       const newUser = await userModel.createUser({
         username: req.body.username,
+        name: req.body.name,
+        email: req.body.email,
         password: hashedPassword,
       });
-      res.redirect('/login');
+      res.redirect('/login'); 
     } catch (error) {
       console.error(error);
       res.redirect('/register');
