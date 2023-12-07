@@ -1,0 +1,58 @@
+/* Styles specific to the index.html file */
+
+/* Custom styles for loginpage */
+.loginpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Styles for the rectangle-parent element */
+.rectangle-parent {
+    position: relative;
+    margin-bottom: var(--gap-3xs);
+}
+
+/* Styles for the rectangle-group element */
+.rectangle-group {
+    position: relative;
+    margin-bottom: var(--gap-3xs);
+}
+
+/* Styles for the rectangle-container element */
+.rectangle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-whitesmoke-100);
+    margin-top: var(--gap-xl);
+}
+
+/* Styles for the group-inner element */
+.group-inner {
+    position: relative;
+    border-radius: var(--br-base);
+    background-color: var(--color-dodgerblue-100);
+    width: 365px;
+    height: 34px;
+    cursor: pointer;
+}
+
+.group-inner:active {
+    transform: scale(1.1);
+}
+
+/* Styles for other specific elements in your index.html file */
+.ng-nhp,
+.ng-nhp1,
+.ng-k {
+    color: var(--color-gray-200);
+    cursor: pointer;
+}
+
+.ng-k:hover {
+    text-decoration: underline;
+}
